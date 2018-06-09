@@ -35,7 +35,9 @@ class Version extends Model
         'topos_count',
         'seasontable_id',
         'seasontable_type',
-        'rooms',
+        'tags',
+        'route_sections',
+	'rooms',
     ];
 
     /**

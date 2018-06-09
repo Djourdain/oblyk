@@ -104,6 +104,9 @@ class DatabaseSeeder extends Seeder
         //Table de recherche
         $this->call(SearchesTableSeeder::class);
 
+        // Table news-letter
+        $this->call(NewslettersTableSeeder::class);
+
         // Gym Indoor
         $this->call(RoomsTableSeeder::class);
         $this->call(GymAdministratorsTableSeeder::class);

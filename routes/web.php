@@ -219,6 +219,9 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::get('/get/sector/{sector_id}/information', 'AdminController@getSectorInformation');
     Route::get('/delete/sector/{sector_id}', 'AdminCRUD\SectorCRUDController@deleteSector')->name('delete_sector');
 
+     // NEWS LETTER
+    Route::get('/admin/send/news-letter/{ref}', 'NewsletterController@sendNewsletter')->name('sendNewsletter');
+
 });
 
 // ADMIN DES GYMS
@@ -278,6 +281,8 @@ Route::get('/API/crags/{lat}/{lng}/{rayon}', 'MapController@getPopupMarkerAround
 Route::get('/API/topo/crags/{topo_id}/', 'MapController@getPopupMarkerCragsTopo')->name('APICragsTopoMap');
 Route::get('/API/massive/crags/{massive_id}/', 'MapController@getPopupMarkerCragsMassive')->name('APICragsMassiveMap');
 Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo')->name('APISalesTopoMap');
+Route::get('/API/crags/search', 'MapController@filterMap')->name('filterMap');
+Route::get('/API/route_grades', 'RouteController@routeGrades')->name('routeGrades');
 
 //INDOOR
 Route::get('/API/gyms/get-sectors/{gym_id}', 'GymSchemeController@getGymSectors')->name('APIGetGymSectors');
