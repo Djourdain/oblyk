@@ -14,14 +14,16 @@ use Illuminate\Support\Facades\Auth;
 
 class GymController extends Controller
 {
-    function gymPage($gym_id, $gym_title){
+    function gymPage($gym_id){
 
         $gym = Gym::where('id', $gym_id)
             ->withCount('links')
             ->withCount('photos')
             ->withCount('videos')
             ->withCount('posts')
+            ->withCount('rooms')
             ->with('photos')
+            ->with('rooms')
             ->with('descriptions.user')
             ->first();
 
@@ -63,4 +65,5 @@ class GymController extends Controller
 
         return view('pages.gym.gym', $data);
     }
+
 }

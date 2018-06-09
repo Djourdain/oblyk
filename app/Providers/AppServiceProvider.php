@@ -7,6 +7,7 @@ use App\Conversation;
 use App\Crag;
 use App\Cross;
 use App\Gym;
+use App\GymRoom;
 use App\Massive;
 use App\Observers\CommentObserver;
 use App\Observers\ConversationObserver;
@@ -16,6 +17,7 @@ use App\Observers\GymObserver;
 use App\Observers\MassiveObserver;
 use App\Observers\PhotoObserver;
 use App\Observers\PostObserver;
+use App\Observers\RoomObserver;
 use App\Observers\RouteObserver;
 use App\Observers\RouteSectionObserver;
 use App\Observers\SectorObserver;
@@ -57,6 +59,7 @@ class AppServiceProvider extends ServiceProvider
         Route::observe(RouteObserver::class);
         RouteSection::observe(RouteSectionObserver::class);
         Topo::observe(TopoObserver::class);
+        GymRoom::observe(RoomObserver::class);
     }
 
     /**

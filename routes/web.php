@@ -60,6 +60,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
 
     //LES SALLES D'ESCALADE
     Route::get('/salle-escalade/{gym_id}/{gym_label}', 'GymController@gymPage')->name('gymPage');
+    Route::get('/salle-escalade/topo/{gym_id}/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
 
     //LA CARTE
     Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
@@ -218,6 +219,31 @@ Route::group(['middleware' => [ 'auth', 'adminLevel' ]], function() {
     Route::get('/get/sector/{sector_id}/information', 'AdminController@getSectorInformation');
     Route::get('/delete/sector/{sector_id}', 'AdminCRUD\SectorCRUDController@deleteSector')->name('delete_sector');
 
+});
+
+// ADMIN DES GYMS
+
+
+Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
+
+    Route::get('/admin/{gym_id}/{gym_label}', 'GymAdminController@layoutPage')->name('gym_admin_home');
+
+    // DASHBOARD
+    Route::get('/admin/{gym_id}/view/dashboard', 'GymAdminController@dashboardView')->name('gym_admin_dashboard_view');
+
+    // LOGO AND BANDEAU
+    Route::get('/admin/{gym_id}/view/upload-logo-bandeau', 'GymAdminController@uploadLogoBandeauView')->name('gym_admin_logo_bandeau_upload_view');
+
+    // SCHEMES
+    Route::get('/admin/{gym_id}/view/topo/comment-ca-marche', 'GymAdminController@howSchemeView')->name('gym_admin_scheme_how');
+    Route::get('/admin/{gym_id}/view/topo/salles', 'GymAdminController@gymSchemesView')->name('gym_admin_schemes_gym');
+    Route::get('/admin/{gym_id}/view/topo/salle/{room_id}', 'GymAdminController@gymSchemeView')->name('gym_admin_scheme_gym');
+    Route::resource('rooms/{gym_id}', 'CRUD\RoomController');
+
+    Route::post('/modal/room/{gym_id}', 'CRUD\RoomController@roomModal')->name('roomModal');
+    Route::post('/modal/room/{gym_id}/upload-scheme-modal', 'CRUD\RoomController@uploadSchemeModal')->name('roomUploadSchemeModal');
+    Route::post('/modal/room/{gym_id}/upload-scheme', 'CRUD\RoomController@uploadScheme')->name('roomUploadScheme');
+
 
 });
 
@@ -253,6 +279,8 @@ Route::get('/API/topo/crags/{topo_id}/', 'MapController@getPopupMarkerCragsTopo'
 Route::get('/API/massive/crags/{massive_id}/', 'MapController@getPopupMarkerCragsMassive')->name('APICragsMassiveMap');
 Route::get('/API/topo/sales/{topo_id}/', 'MapController@getPopupMarkerSalesTopo')->name('APISalesTopoMap');
 
+//INDOOR
+Route::get('/API/gyms/get-sectors/{gym_id}', 'GymSchemeController@getGymSectors')->name('APIGetGymSectors');
 
 // PARTENAIRE
 Route::post('/user/save-birth', 'CRUD\UserController@saveBirth')->name('saveUserBirth');
