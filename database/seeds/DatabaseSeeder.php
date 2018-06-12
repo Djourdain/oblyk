@@ -110,6 +110,8 @@ class DatabaseSeeder extends Seeder
         // Gym Indoor
         $this->call(RoomsTableSeeder::class);
         $this->call(GymAdministratorsTableSeeder::class);
+        $this->call(GymSectorsTableSeeder::class);
+        $this->call(GymRoutesTableSeeder::class);
 
     }
 }
