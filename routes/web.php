@@ -263,11 +263,16 @@ Route::group(['middleware' => [ 'auth', 'gymAdministrator' ]], function() {
     Route::get('/admin/{gym_id}/view/team', 'GymAdminController@gymTeamView')->name('gym_admin_team_view');
     Route::get('/admin/{gym_id}/view/settings', 'GymAdminController@gymSettingsView')->name('gym_admin_settings_view');
 
+    Route::post('/modal/gym-administrator/{gym_id}', 'CRUD\GymAdministratorController@gymAddAdministratorModal')->name('gymAddAdministratorModal');
+    Route::post('/admin/administrator/add/{gym_id}/{user_id}', 'CRUD\GymAdministratorController@addAdministrator');
+
 });
 
 // GYM ADMIN RESSOURCE ROUTE
 Route::resource('rooms', 'CRUD\RoomController');
 Route::resource('gym_sectors', 'CRUD\GymSectorController');
+Route::resource('gym_administrators', 'CRUD\GymAdministratorController');
+Route::get('/API/users/by-name/{gym_id}/{name}', 'CRUD\GymAdministratorController@gymSearchAdministrator');
 
 
 //IFRAME

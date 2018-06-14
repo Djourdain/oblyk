@@ -69,4 +69,9 @@ class User extends Authenticatable
     public function userConversations(){ return $this->hasMany('App\UserConversation','user_id', 'id'); }
     public function videos() { return $this->hasMany('App\Video','user_id', 'id'); }
     public function administeredGyms () {return $this->hasMany('App\GymAdministrator', 'user_id','id'); }
+
+
+    public function picture ($size = 100){
+        return file_exists(storage_path('app/public/users/100/user-' . $this->id . '.jpg')) ? '/storage/users/' . $size . '/user-' . $this->id . '.jpg' : '/img/icon-search-user.svg';
+    }
 }
