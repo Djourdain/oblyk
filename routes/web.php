@@ -60,7 +60,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
 
     //LES SALLES D'ESCALADE
     Route::get('/salle-escalade/{gym_id}/{gym_label}', 'GymController@gymPage')->name('gymPage');
+
+    // INDOOR SCHEME
     Route::get('/salle-escalade/topo/{gym_id}/{room_id}/{gym_label}', 'GymSchemeController@schemePage')->name('gymSchemePage');
+    Route::get('/salle-escalade/topo/sectors/{room_id}', 'GymSchemeController@getGymSectorsView')->name('getGymSectorsView');
+    Route::get('/salle-escalade/topo/sector/{sector_id}', 'GymSchemeController@getGymSectorView')->name('getGymSectorView');
+    Route::get('/salle-escalade/topo/route/{route_id}', 'GymSchemeController@getGymRouteView')->name('getGymRouteView');
 
     //LA CARTE
     Route::get('/carte-des-falaises', 'MapController@mapPage')->name('map');
@@ -310,7 +315,7 @@ Route::get('/API/crags/search', 'MapController@filterMap')->name('filterMap');
 Route::get('/API/route_grades', 'RouteController@routeGrades')->name('routeGrades');
 
 //INDOOR
-Route::get('/API/gyms/get-sectors/{gym_id}', 'GymSchemeController@getGymSectors')->name('APIGetGymSectors');
+Route::get('/API/gyms/get-sectors/{room_id}', 'GymSchemeController@getGymSectors')->name('APIGetGymSectors');
 
 // PARTENAIRE
 Route::post('/user/save-birth', 'CRUD\UserController@saveBirth')->name('saveUserBirth');
